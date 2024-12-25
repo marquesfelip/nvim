@@ -5,12 +5,32 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Move line like VS Code
-keymap.set('n', '<A-k>', ':m .-2<CR>==', opts)
-keymap.set('n', '<A-j>', ':m .+1<CR>==', opts)
+keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", opts)
+keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", opts)
+
+keymap.set('n', 'J', 'mzJ`z')
 
 -- Jump and centralize
 keymap.set('n', '<C-u>', '<C-u>zz')
 keymap.set('n', '<C-d>', '<C-d>zz')
+keymap.set('n', 'n', 'nzzzv')
+keymap.set('n', 'N', 'Nzzzv')
+
+-- greatest remap ever
+keymap.set('x', '<leader>p', '"_dP')
+
+-- copy to system clipboard
+keymap.set('n', '<leader>y', '"+y', { desc = '[Y]ank do System Clipboard' })
+keymap.set('v', '<leader>y', '"+y', { desc = '[Y]ank do System Clipboard' })
+keymap.set('n', '<leader>Y', '"+Y', { desc = '[Y]ank do System Clipboard' })
+
+keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
+keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
+keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
+keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
+
+keymap.set('n', '<leader>rs', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Rename' })
+keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', opts)
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
@@ -45,3 +65,9 @@ keymap.set('n', '<C-w><left>', '<C-w><')
 keymap.set('n', '<C-w><right>', '<C-w>>')
 keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
+
+-- Go snippets
+keymap.set('n', '<leader>cge', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>', { desc = 'Check and Return [E]rror' })
+keymap.set('n', '<leader>cga', 'oassert.NoError(err, "")<Esc>F";a', { desc = 'Insert [A]ssert Error' })
+keymap.set('n', '<leader>cgf', 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj', { desc = 'Check and Log [F]atal Error' })
+keymap.set('n', '<leader>cgl', 'oif err != nil {<CR>}<Esc>O.logger.Error("error", "error", err)<Esc>F.;i', { desc = 'Check and [L]og Error' })
