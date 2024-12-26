@@ -99,6 +99,7 @@ end, { desc = 'Harpoon to File 5' })
 keymap.set('n', '<A-6>', function()
   require('harpoon'):list():select(6)
 end, { desc = 'Harpoon to File 6' })
+-- /Harpoon
 
 -- Go snippets
 keymap.set('n', '<leader>cge', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>', { desc = 'Check and Return [E]rror' })
