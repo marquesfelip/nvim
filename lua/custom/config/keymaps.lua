@@ -30,7 +30,7 @@ keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
 keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
 keymap.set('n', '<leader>rs', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Rename' })
-keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', opts)
+keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { desc = 'Make the File an EXE' })
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
@@ -65,6 +65,40 @@ keymap.set('n', '<C-w><left>', '<C-w><')
 keymap.set('n', '<C-w><right>', '<C-w>>')
 keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
+
+-- Harpoon
+keymap.set('n', '<leader>a', function()
+  require('harpoon'):list():add()
+end, { desc = 'Harpoon [A]dd File' })
+
+keymap.set('n', '<leader>hq', function()
+  local harpoon = require 'harpoon'
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = 'Harpoon [Q]uick Menu' })
+
+keymap.set('n', '<A-1>', function()
+  require('harpoon'):list():select(1)
+end, { desc = 'Harpoon to File 1' })
+
+keymap.set('n', '<A-2>', function()
+  require('harpoon'):list():select(2)
+end, { desc = 'Harpoon to File 2' })
+
+keymap.set('n', '<A-3>', function()
+  require('harpoon'):list():select(3)
+end, { desc = 'Harpoon to File 3' })
+
+keymap.set('n', '<A-4>', function()
+  require('harpoon'):list():select(4)
+end, { desc = 'Harpoon to File 4' })
+
+keymap.set('n', '<A-5>', function()
+  require('harpoon'):list():select(5)
+end, { desc = 'Harpoon to File 5' })
+
+keymap.set('n', '<A-6>', function()
+  require('harpoon'):list():select(6)
+end, { desc = 'Harpoon to File 6' })
 
 -- Go snippets
 keymap.set('n', '<leader>cge', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>', { desc = 'Check and Return [E]rror' })
