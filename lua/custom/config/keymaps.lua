@@ -4,40 +4,31 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+keymap.set('n', 'q', '<nop>')
+keymap.set('n', 'Q', '<nop>')
+keymap.set('n', 'J', 'mzJ`z')
+
 -- Move line like VS Code
 keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", opts)
 keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", opts)
 
-keymap.set('n', 'J', 'mzJ`z')
-
 -- Jump and centralize
-keymap.set('n', '<C-u>', '<C-u>zz')
-keymap.set('n', '<C-d>', '<C-d>zz')
-keymap.set('n', 'n', 'nzzzv')
-keymap.set('n', 'N', 'Nzzzv')
+keymap.set('n', '<C-u>', '<C-u>zz', opts)
+keymap.set('n', '<C-d>', '<C-d>zz', opts)
+keymap.set('n', 'n', 'nzzzv', opts)
+keymap.set('n', 'N', 'Nzzzv', opts)
 
 -- greatest remap ever
-keymap.set('x', '<leader>p', '"_dP')
+keymap.set('x', '<leader>p', '"_dP', { desc = '[P]ast and preserve the copy' })
 
--- copy to system clipboard
+-- Copy to system clipboard
 keymap.set('n', '<leader>y', '"+y', { desc = '[Y]ank do System Clipboard' })
 keymap.set('v', '<leader>y', '"+y', { desc = '[Y]ank do System Clipboard' })
 keymap.set('n', '<leader>Y', '"+Y', { desc = '[Y]ank do System Clipboard' })
 
-keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
-keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
-keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
-keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
-
-keymap.set('n', '<leader>rs', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Rename' })
-keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { desc = 'Make the File an EXE' })
-
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
-
--- Delete a word backwards
-keymap.set('n', 'dw', 'vb_d')
 
 -- Select all
 keymap.set('n', '<C-a>', 'gg<S-v>G')
@@ -100,6 +91,12 @@ keymap.set('n', '<A-6>', function()
   require('harpoon'):list():select(6)
 end, { desc = 'Harpoon to File 6' })
 -- /Harpoon
+
+-- Quicklist
+keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz', { desc = 'Jump to Previous on Quickfix list' })
+keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz', { desc = 'Jump to Next on Quickfix list' })
+-- keymap.set('n', '<leader>k', '<cmd>lprev<CR>zz', { desc = 'Jump to Previous on List' })
+-- keymap.set('n', '<leader>j', '<cmd>lnext<CR>zz', { desc = 'Jump to Next on List' })
 
 -- Go snippets
 keymap.set('n', '<leader>cge', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>', { desc = 'Check and Return [E]rror' })
