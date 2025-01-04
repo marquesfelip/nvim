@@ -13,7 +13,7 @@ return {
         function()
           require('hop').hint_words()
         end,
-        desc = '[F]ind and [J]ump to words with Hop',
+        desc = '[F]ind and [J]ump in current buffer',
         mode = { 'n', 'x', 'o' },
       },
     },
