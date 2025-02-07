@@ -8,7 +8,7 @@ keymap.set('n', 'q', '<nop>')
 keymap.set('n', 'Q', '<nop>')
 keymap.set('n', 'J', 'mzJ`z')
 
--- Move line like VS Code
+-- Move line(s) like VS Code
 keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", opts)
 keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", opts)
 
@@ -45,7 +45,7 @@ keymap.set('n', '<S-tab>', ':tabprev<Return>', opts)
 keymap.set('n', 'ss', ':split<Return>', opts)
 keymap.set('n', 'sv', ':vsplit<Return>', opts)
 
--- Move window
+-- Navigate windows
 keymap.set('n', '<C-h>', ':TmuxNavigateLeft<CR>', opts)
 keymap.set('n', '<C-j>', ':TmuxNavigateDown<CR>', opts)
 keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>', opts)
