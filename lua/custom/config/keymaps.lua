@@ -6,6 +6,8 @@ local opts = { noremap = true, silent = true }
 
 keymap.set('n', 'q', '<nop>')
 keymap.set('n', 'Q', '<nop>')
+keymap.set('n', '<C-o>', '<nop>')
+keymap.set('n', '<C-i>', '<nop>')
 keymap.set('n', 'J', 'mzJ`z')
 
 -- Move line(s) like VS Code
@@ -34,7 +36,8 @@ keymap.set('n', '-', '<C-x>')
 keymap.set('n', '<C-a>', 'gg<S-v>G')
 
 -- Jumplist
-keymap.set('n', '<C-m>', '<C-i>', opts)
+keymap.set('n', '<C-f>', '<C-i>', opts)
+keymap.set('n', '<C-b>', '<C-o>', opts)
 
 -- New tab
 keymap.set('n', 'te', ':tabedit<Return>', opts)
