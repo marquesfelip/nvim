@@ -371,7 +371,8 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', version = '1.11.0', config = true }, -- NOTE: Must be loaded before dependants
+      { 'williamboman/mason.nvim', version = '1.11.0', config = true },
+      -- NOTE: Must be loaded before dependants
       { 'williamboman/mason-lspconfig.nvim', version = '1.32.0' },
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -500,6 +501,14 @@ require('lazy').setup({
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
           end
+        end,
+      })
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+        callback = function()
+          vim.opt_local.tabstop = 2
+          vim.opt_local.shiftwidth = 2
+          vim.opt_local.softtabstop = 2
         end,
       })
 
