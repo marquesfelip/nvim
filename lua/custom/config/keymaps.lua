@@ -7,6 +7,7 @@ local opts = { noremap = true, silent = true }
 keymap.set('n', 'q', '<nop>')
 keymap.set('n', 'Q', '<nop>')
 keymap.set('n', 'J', 'mzJ`z')
+keymap.set('n', '<C-m>', '<C-i>')
 
 -- Move line(s) like VS Code
 keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", opts)
@@ -99,4 +100,4 @@ keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz', { desc = 'Jump to Next on Quick
 keymap.set('n', '<leader>cge', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>', { desc = 'Check and Return [E]rror' })
 keymap.set('n', '<leader>cga', 'oassert.NoError(err, "")<Esc>F";a', { desc = 'Insert [A]ssert Error' })
 keymap.set('n', '<leader>cgf', 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj', { desc = 'Check and Log [F]atal Error' })
-keymap.set('n', '<leader>cgl', 'oif err != nil {<CR>}<Esc>O.logger.Error("error", "error", err)<Esc>F.;i', { desc = 'Check and [L]og Error' })
+keymap.set('n', '<leader>cgl', 'oif err != nil {<CR>}<Esc>Olog.logger.Error("error", "error", err)<Esc>F.;i', { desc = 'Check and [L]og Error' })
