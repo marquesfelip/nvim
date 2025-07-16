@@ -93,6 +93,10 @@ end, { desc = 'Harpoon to File 6' })
 -- Undotree
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
+-- Github Copilot
+vim.keymap.set('n', '<leader>ccd', ':Copilot disable<CR>', { desc = 'Copilot [D]isable' })
+vim.keymap.set('n', '<leader>cce', ':Copilot enable<CR>', { desc = 'Copilot [E]nable' })
+
 -- Quicklist
 keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz', { desc = 'Jump to Previous on Quickfix list' })
 keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz', { desc = 'Jump to Next on Quickfix list' })
