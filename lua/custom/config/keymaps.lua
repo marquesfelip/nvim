@@ -4,6 +4,9 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- Save file like any other normal editor
+keymap.set('n', '<C-s>', ':w<CR>', opts)
+
 keymap.set('n', 'q', '<nop>')
 keymap.set('n', 'Q', '<nop>')
 keymap.set('n', 'J', 'mzJ`z')
@@ -34,7 +37,7 @@ keymap.set('n', '-', '<C-x>')
 -- Select all
 keymap.set('n', '<C-a>', 'gg<S-v>G')
 
--- New tab
+-- New tab and navigation
 keymap.set('n', 'te', ':tabedit<Return>', opts)
 keymap.set('n', '<tab>', ':tabnext<Return>', opts)
 keymap.set('n', '<S-tab>', ':tabprev<Return>', opts)
