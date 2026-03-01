@@ -25,7 +25,7 @@ keymap.set('n', '<C-d>', '<C-d>zz', opts)
 keymap.set('n', 'n', 'nzzzv', opts)
 keymap.set('n', 'N', 'Nzzzv', opts)
 
--- greatest remap ever
+-- Paste and preserve the copy
 keymap.set('x', '<leader>p', '"_dP', { desc = '[P]ast and preserve the copy' })
 
 -- Copy to system clipboard
@@ -55,11 +55,11 @@ keymap.set('n', '<C-j>', ':TmuxNavigateDown<CR>', opts)
 keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>', opts)
 keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>', opts)
 
--- Resize window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+-- DISABLE | Resize window
+-- keymap.set('n', '<C-w><left>', '<C-w><')
+-- keymap.set('n', '<C-w><right>', '<C-w>>')
+-- keymap.set('n', '<C-w><up>', '<C-w>+')
+-- keymap.set('n', '<C-w><down>', '<C-w>-')
 
 -- Harpoon
 keymap.set('n', '<leader>a', function()
@@ -100,8 +100,8 @@ end, { desc = 'Harpoon to File 6' })
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Undotree' })
 
 -- Github Copilot
-vim.keymap.set('n', '<leader>ccd', ':Copilot disable<CR>', { desc = 'Copilot [D]isable' })
-vim.keymap.set('n', '<leader>cce', ':Copilot enable<CR>', { desc = 'Copilot [E]nable' })
+vim.keymap.set('n', '<leader>cad', ':Copilot disable<CR>', { desc = 'Github Copilot [D]isable' })
+vim.keymap.set('n', '<leader>cae', ':Copilot enable<CR>', { desc = 'Github Copilot [E]nable' })
 
 -- Quicklist
 keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz', { desc = 'Jump to Previous on Quickfix list' })

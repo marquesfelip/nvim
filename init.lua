@@ -188,6 +188,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
+      preset = "helix",
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
@@ -227,15 +228,17 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>c',  group = '[C]ode',     mode = { 'n', 'x' } },
+        { '<leader>c',  group = '[C]ode',       mode = { 'n', 'x' } },
         { '<leader>d',  group = '[D]ocument' },
         { '<leader>r',  group = '[R]ename' },
         { '<leader>s',  group = '[S]earch' },
         { '<leader>w',  group = '[W]orkspace' },
         { '<leader>t',  group = '[T]oggle' },
-        { '<leader>H',  group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>Gh', group = '[G]it [H]unk', mode = { 'n', 'v' } },
         -- marquesfelip: customization
-        { '<leader>cg', group = '[G]olang',   mode = { 'n' } },
+        { '<leader>cg', group = '[G]olang',     mode = { 'n' } },
+        { '<leader>ca', group = '[A]I',         mode = { 'n', 'x' } },
+        { '<leader>h',  group = '[H]arpoon',    mode = { 'n' } }
       },
     },
   },
@@ -497,9 +500,9 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            map('<leader>th', function()
+            map('<leader>ch', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
+            end, 'Toggle Inlay [H]ints')
           end
         end,
       })
@@ -842,16 +845,16 @@ require('lazy').setup({
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
-    -- priority = 1000, -- Make sure to load this before all the other start plugins.
-    -- init = function()
-    -- Load the colorscheme here.
-    -- Like many other themes, this one has different styles, and you could load
-    -- any other, such as 'tokyonight-night', tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    -- vim.cmd.colorscheme 'tokyonight-night'
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    init = function()
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-night', tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme 'tokyonight-night'
 
-    -- You can configure highlights by doing something like:
-    -- vim.cmd.hi 'Comment gui=none'
-    -- end,
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
+    end,
   },
 
   {
