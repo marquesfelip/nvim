@@ -1,7 +1,8 @@
 return {
   'rachartier/tiny-inline-diagnostic.nvim',
+  enabled = false,
   event = 'VeryLazy', -- Or `LspAttach`
-  priority = 1000, -- needs to be loaded in first
+  priority = 1000,    -- needs to be loaded in first
   config = function()
     require('tiny-inline-diagnostic').setup {
       -- Style preset for diagnostic messages
@@ -10,15 +11,15 @@ return {
       -- "ghost", "simple", "nonerdfont", "amongus"
       preset = 'classic',
 
-      transparent_bg = false, -- Set the background of the diagnostic to transparent
+      transparent_bg = false,         -- Set the background of the diagnostic to transparent
       transparent_cursorline = false, -- Set the background of the cursorline to transparent (only one the first diagnostic)
 
       hi = {
         error = 'DiagnosticError', -- Highlight group for error messages
-        warn = 'DiagnosticWarn', -- Highlight group for warning messages
-        info = 'DiagnosticInfo', -- Highlight group for informational messages
-        hint = 'DiagnosticHint', -- Highlight group for hint or suggestion messages
-        arrow = 'NonText', -- Highlight group for diagnostic arrows
+        warn = 'DiagnosticWarn',   -- Highlight group for warning messages
+        info = 'DiagnosticInfo',   -- Highlight group for informational messages
+        hint = 'DiagnosticHint',   -- Highlight group for hint or suggestion messages
+        arrow = 'NonText',         -- Highlight group for diagnostic arrows
 
         -- Background color for diagnostics
         -- Can be a highlight group or a hexadecimal color (#RRGGBB)
@@ -141,7 +142,7 @@ return {
         -- You should not change this unless the plugin does not work with your configuration
         overwrite_events = nil,
       },
-      disabled_ft = {}, -- List of filetypes to disable the plugin
+      disabled_ft = {},                           -- List of filetypes to disable the plugin
     }
     vim.diagnostic.config { virtual_text = true } -- Only if needed in your configuration, if you already have native LSP diagnostics
   end,

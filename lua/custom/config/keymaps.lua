@@ -4,6 +4,9 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- Lazy
+keymap.set('n', '<leader>L', ':Lazy<Return>', { desc = '[L]azy' })
+
 -- Save file like any other normal editor
 keymap.set('n', '<C-s>', ':w<CR>', opts)
 
@@ -109,5 +112,7 @@ keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz', { desc = 'Jump to Next on Quick
 -- Go snippets
 keymap.set('n', '<leader>cge', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>', { desc = 'Check and Return [E]rror' })
 keymap.set('n', '<leader>cga', 'oassert.NoError(err, "")<Esc>F";a', { desc = 'Insert [A]ssert Error' })
-keymap.set('n', '<leader>cgf', 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj', { desc = 'Check and Log [F]atal Error' })
-keymap.set('n', '<leader>cgl', 'oif err != nil {<CR>}<Esc>Olog.logger.Error("error", "error", err)<Esc>F.;i', { desc = 'Check and [L]og Error' })
+keymap.set('n', '<leader>cgf', 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj',
+  { desc = 'Check and Log [F]atal Error' })
+keymap.set('n', '<leader>cgl', 'oif err != nil {<CR>}<Esc>Olog.logger.Error("error", "error", err)<Esc>F.;i',
+  { desc = 'Check and [L]og Error' })
