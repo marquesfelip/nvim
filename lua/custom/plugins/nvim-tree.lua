@@ -15,6 +15,9 @@ return {
       },
       -- change folder arrow icons
       renderer = {
+        -- deixa os nós ocultos (nome começando com `.`) em cinza
+        -- a cor é definida em custom/config/dotfiles.lua
+        highlight_hidden = 'name',
         indent_markers = {
           enable = true,
         },
