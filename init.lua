@@ -306,6 +306,16 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
+        defaults = {
+          -- O previewer do Telescope (0.1.x) ainda usa a API antiga do
+          --  nvim-treesitter (`nvim-treesitter.configs` e `ft_to_lang`), que foi
+          --  removida no branch `main`. Com treesitter ligado, todo preview
+          --  quebra com "attempt to call field 'ft_to_lang'". Desligando, o
+          --  preview cai no highlighting por regex (vim syntax) e funciona.
+          preview = {
+            treesitter = false,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
