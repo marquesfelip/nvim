@@ -935,12 +935,18 @@ require('lazy').setup({
     end,
   },
   { -- Highlight, edit, and navigate code
+    -- NOTE: nvim-treesitter was rewritten and the `main` branch does NOT support
+    --  lazy-loading, nor the old `nvim-treesitter.configs` module.
+    --  See `:help nvim-treesitter` and the README for the new API.
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
+    branch = 'main',
+    -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
+    config = function()
+      -- Parsers that should always be available. Missing ones are installed
+      --  automatically the first time a matching filetype is opened.
+      local parsers = {
         'bash',
         'c',
         'diff',
@@ -956,22 +962,68 @@ require('lazy').setup({
         'typescript',
         'rust',
         'go',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
+      }
+      require('nvim-treesitter').install(parsers)
+
+      ---Enable treesitter features for a buffer, if a parser is available.
+      ---@param buf integer
+      ---@param language string
+      local function treesitter_try_attach(buf, language)
+        -- The buffer may have been closed while the parser was being installed
+        if not vim.api.nvim_buf_is_valid(buf) then
+          return
+        end
+
+        -- Bail out if there is no parser for this language
+        if not vim.treesitter.language.add(language) then
+          return
+        end
+
+        -- Enable syntax highlighting
+        vim.treesitter.start(buf, language)
+
+        -- Enable treesitter based folds (uncomment if you want them)
+        -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- vim.wo.foldmethod = 'expr'
+
+        -- Enable treesitter based indentation when the language provides an
+        --  `indents` query, otherwise vim's built-in indenting is used.
+        if vim.treesitter.query.get(language, 'indents') then
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end
+
+      local available_parsers = require('nvim-treesitter').get_available()
+
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('kickstart-treesitter', { clear = true }),
+        callback = function(args)
+          local buf, filetype = args.buf, args.match
+
+          local language = vim.treesitter.language.get_lang(filetype)
+          if not language then
+            return
+          end
+
+          if vim.tbl_contains(require('nvim-treesitter').get_installed 'parsers', language) then
+            -- Parser is already installed
+            treesitter_try_attach(buf, language)
+          elseif vim.tbl_contains(available_parsers, language) then
+            -- Parser is available upstream: install it and enable it afterwards
+            require('nvim-treesitter').install(language):await(function()
+              treesitter_try_attach(buf, language)
+            end)
+          else
+            -- Not managed by nvim-treesitter, but a parser may still exist
+            treesitter_try_attach(buf, language)
+          end
+        end,
+      })
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+    --    - Incremental selection: Included, see `:help treesitter-incremental-selection`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
